@@ -14,3 +14,4 @@ venv/
 backend/demo_workspace/*
 !backend/demo_workspace/.gitkeep
 frontend/.vite/
+Yuno AI Engineer Challenge.pdf
