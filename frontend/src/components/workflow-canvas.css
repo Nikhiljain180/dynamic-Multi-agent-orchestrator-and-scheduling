@@ -1,0 +1,245 @@
+/* n8n-inspired workflow canvas styling */
+
+.workflow-flow {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  --xy-background-color: #0b1220;
+  --xy-background-pattern-color: rgba(148, 163, 184, 0.18);
+  --xy-edge-stroke-default: #64748b;
+  --xy-edge-stroke-width-default: 2;
+  --xy-edge-stroke-selected-default: #38bdf8;
+  --xy-connectionline-stroke-default: #38bdf8;
+  --xy-minimap-background-color-default: #111827;
+  --xy-minimap-mask-background-color-default: rgba(15, 23, 42, 0.65);
+  --xy-minimap-node-background-color-default: #334155;
+  --xy-controls-button-background-color-default: #1e293b;
+  --xy-controls-button-background-color-hover-default: #334155;
+  --xy-controls-button-color-default: #e2e8f0;
+  --xy-controls-button-border-color-default: #334155;
+}
+
+.workflow-flow .react-flow {
+  width: 100%;
+  height: 100%;
+}
+
+.workflow-flow .react-flow__node {
+  overflow: visible !important;
+}
+
+.workflow-flow .react-flow__controls {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.workflow-flow .react-flow__minimap {
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.workflow-flow .react-flow__edge-text {
+  fill: #e2e8f0;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.workflow-flow .react-flow__edge-textbg {
+  fill: #111827;
+  stroke: #334155;
+  stroke-width: 1;
+}
+
+/* Shell = card + output connector (n8n style) */
+.wf-node-shell {
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: visible;
+  padding-right: 34px;
+}
+
+.wf-node-shell--selected .wf-node {
+  border-color: var(--wf-accent, #38bdf8);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--wf-accent, #38bdf8) 55%, transparent), 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+.wf-node {
+  width: 240px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #1f2937 0%, #111827 100%);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  color: #f8fafc;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.wf-node__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--wf-accent, #38bdf8) 28%, #111827) 0%,
+    rgba(17, 24, 39, 0.2) 100%
+  );
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.wf-node__icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--wf-accent, #38bdf8) 22%, #0f172a);
+  color: var(--wf-accent, #38bdf8);
+  border: 1px solid color-mix(in srgb, var(--wf-accent, #38bdf8) 35%, transparent);
+}
+
+.wf-node__titles {
+  min-width: 0;
+  flex: 1;
+}
+
+.wf-node__label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #f8fafc;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wf-node__badge {
+  margin-top: 2px;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--wf-accent, #38bdf8) 75%, #e2e8f0);
+  font-weight: 700;
+}
+
+.wf-node__body {
+  padding: 10px 14px 12px;
+}
+
+.wf-node__meta {
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+
+.wf-node__subtitle {
+  margin-top: 4px;
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Output: stem on the right of the card; handle and + are positioned on the shell */
+.wf-node__output {
+  display: flex;
+  align-items: center;
+  width: 24px;
+  margin-left: -1px;
+  pointer-events: none;
+}
+
+.wf-node__stem {
+  width: 24px;
+  height: 2px;
+  background: color-mix(in srgb, var(--wf-accent, #38bdf8) 70%, #64748b);
+  flex-shrink: 0;
+}
+
+.wf-handle {
+  width: 14px !important;
+  height: 14px !important;
+  border: 2px solid #0f172a !important;
+  background: var(--wf-accent, #38bdf8) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--wf-accent, #38bdf8) 30%, transparent);
+  z-index: 6;
+  pointer-events: all !important;
+  opacity: 1 !important;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.wf-handle--target {
+  left: -7px !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+.wf-handle--target:hover {
+  transform: translate(-50%, -50%) scale(1.15) !important;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--wf-accent, #38bdf8) 45%, transparent);
+}
+
+.wf-handle--source {
+  right: 38px !important;
+  top: 50% !important;
+  transform: translate(50%, -50%) !important;
+}
+
+.wf-handle--source:hover {
+  transform: translate(50%, -50%) scale(1.15) !important;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--wf-accent, #38bdf8) 45%, transparent);
+}
+
+.wf-node__add-btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  border: 2px solid #cbd5e1;
+  background: #f8fafc;
+  color: #0f172a;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 5;
+  padding: 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+  pointer-events: all;
+}
+
+.wf-node__add-btn:hover {
+  transform: translateY(-50%) scale(1.08);
+  background: #ffffff;
+  border-color: var(--wf-accent, #38bdf8);
+  color: var(--wf-accent, #38bdf8);
+}
+
+.wf-node__add-btn:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+.workflow-flow__toolbar {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.workflow-flow__toolbar .MuiChip-root {
+  pointer-events: auto;
+  background: rgba(17, 24, 39, 0.85);
+  backdrop-filter: blur(6px);
+}

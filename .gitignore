@@ -1,0 +1,16 @@
+.env
+__pycache__/
+*.pyc
+.pytest_cache/
+.cursor/
+.idea/
+.mypy_cache/
+node_modules/
+dist/
+.DS_Store
+*.egg-info/
+.venv/
+venv/
+backend/demo_workspace/*
+!backend/demo_workspace/.gitkeep
+frontend/.vite/

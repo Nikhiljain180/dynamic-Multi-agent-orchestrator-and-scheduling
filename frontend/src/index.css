@@ -1,0 +1,193 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, textarea, select {
+  font: inherit;
+}
+
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 240px;
+  background: #111827;
+  border-right: 1px solid #1f2937;
+  padding: 24px 16px;
+}
+
+.sidebar h1 {
+  font-size: 1.1rem;
+  margin: 0 0 24px;
+  color: #38bdf8;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar a {
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #94a3b8;
+}
+
+.sidebar a.active,
+.sidebar a:hover {
+  background: #1e293b;
+  color: #f8fafc;
+}
+
+.content {
+  flex: 1;
+  padding: 32px;
+  overflow: auto;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.page-header h2 {
+  margin: 0;
+}
+
+.btn {
+  background: #0284c7;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #0369a1;
+}
+
+.btn-secondary {
+  background: #334155;
+}
+
+.btn-danger {
+  background: #dc2626;
+}
+
+.card {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.form-grid {
+  display: grid;
+  gap: 12px;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+input, textarea, select {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 10px;
+  color: #e2e8f0;
+}
+
+textarea {
+  min-height: 100px;
+}
+
+.tag {
+  display: inline-block;
+  background: #1e293b;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  margin-right: 6px;
+}
+
+.status-queued { color: #fbbf24; }
+.status-running { color: #38bdf8; }
+.status-completed { color: #4ade80; }
+.status-failed { color: #f87171; }
+
+.monitor-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.log-stream {
+  max-height: 400px;
+  overflow: auto;
+  font-family: ui-monospace, monospace;
+  font-size: 0.85rem;
+}
+
+.log-item, .message-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #1f2937;
+}
+
+.workflow-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 16px;
+  height: calc(100vh - 120px);
+}
+
+.flow-canvas {
+  background: #0b1220;
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+  height: 100%;
+}
+
+.panel {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+  padding: 16px;
+  overflow: auto;
+}
+
+.empty {
+  color: #64748b;
+  text-align: center;
+  padding: 48px;
+}
+
+/* React Flow + legacy page helpers still used outside MUI */
