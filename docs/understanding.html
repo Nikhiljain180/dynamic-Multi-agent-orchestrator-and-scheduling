@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yuno Platform — Documentation of My Understanding</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --surface: #111827;
+      --surface-2: #1e293b;
+      --border: rgba(148, 163, 184, 0.15);
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --primary: #38bdf8;
+      --primary-dim: rgba(56, 189, 248, 0.12);
+      --secondary: #818cf8;
+      --success: #4ade80;
+      --gradient: linear-gradient(135deg, #0284c7 0%, #6366f1 100%);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 16px;
+    }
+
+    .hero {
+      background: linear-gradient(180deg, #0f172a 0%, var(--bg) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 3.5rem 1.5rem 3rem;
+    }
+
+    .hero-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--primary-dim);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--primary);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      margin-bottom: 1.25rem;
+    }
+
+    .logo-mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--gradient);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 32px rgba(56, 189, 248, 0.25);
+    }
+
+    h1 {
+      font-size: clamp(1.85rem, 4vw, 2.75rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 42rem;
+    }
+
+    nav.toc {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    nav.toc a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.4rem 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    nav.toc a:hover {
+      color: var(--primary);
+      border-color: rgba(56, 189, 248, 0.35);
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    section {
+      margin-bottom: 3.5rem;
+      scroll-margin-top: 1.5rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    h2 .num {
+      display: inline-grid;
+      place-items: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 8px;
+      background: var(--gradient);
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 1.75rem 0 0.75rem;
+      color: var(--primary);
+    }
+
+    p { margin-bottom: 1rem; color: #cbd5e1; }
+
+    ul, ol {
+      margin: 0 0 1rem 1.25rem;
+      color: #cbd5e1;
+    }
+
+    li { margin-bottom: 0.5rem; }
+
+    strong { color: var(--text); font-weight: 600; }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem 1.35rem;
+    }
+
+    .card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .card h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .card p {
+      font-size: 0.875rem;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .diagram-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      overflow-x: auto;
+    }
+
+    .mermaid {
+      display: flex;
+      justify-content: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+      margin: 1rem 0;
+      background: var(--surface);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    th, td {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--surface-2);
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    td code, p code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8em;
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--primary);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+    }
+
+    .flow-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin: 1.25rem 0;
+    }
+
+    .flow-step {
+      display: flex;
+      gap: 1rem;
+      position: relative;
+      padding-bottom: 1.25rem;
+    }
+
+    .flow-step:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 15px;
+      top: 32px;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .step-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--surface-2);
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.8rem;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      z-index: 1;
+    }
+
+    .step-body {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      flex: 1;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .pill {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .pill.done { border-color: rgba(74, 222, 128, 0.35); color: var(--success); }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.25rem 0;
+    }
+
+    .compare-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+    }
+
+    .compare-card.selected {
+      border-color: rgba(56, 189, 248, 0.45);
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.2);
+    }
+
+    .compare-card h4 { font-size: 0.9rem; margin-bottom: 0.35rem; }
+    .compare-card p { font-size: 0.8rem; margin: 0; color: var(--muted); }
+    .check { color: var(--success); font-weight: 700; }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+
+    @media print {
+      body { background: #fff; color: #111; }
+      .hero { background: #f8fafc; }
+      .card, .diagram-box, table, .flow-step .step-body { border-color: #ddd; }
+      nav.toc { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="logo-mark">Y</div>
+      <div class="badge">Yuno AI Engineer Challenge · Submission</div>
+      <h1>Documentation of My Understanding</h1>
+      <p class="subtitle">
+        How I interpreted the problem, mapped requirements to code, and why I chose LangGraph,
+        Telegram, and a three-layer architecture for agent orchestration.
+      </p>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Sections">
+    <a href="#problem">Problem</a>
+    <a href="#mapping">Requirements</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#flows">Flows</a>
+    <a href="#data">Data model</a>
+    <a href="#tradeoffs">Tradeoffs</a>
+    <a href="#codebase">Codebase</a>
+  </nav>
+
+  <main>
+    <section id="problem">
+      <h2><span class="num">1</span> Problem understanding</h2>
+      <p>The challenge asks for a <strong>platform</strong>, not a single chatbot. Users must be able to define agents, compose workflows, execute on a real runtime, observe runs, and interact via an external channel — all from a web UI.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🤖</div>
+          <h4>Configure agents</h4>
+          <p>Personality, tools, memory, skills, guardrails, provider overrides</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔀</div>
+          <h4>Compose workflows</h4>
+          <p>Linear pipelines, conditional routing, feedback loops</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h4>Real runtime</h4>
+          <p>LangGraph executes LLM calls and tools — not a UI mock</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📡</div>
+          <h4>Observe &amp; converse</h4>
+          <p>Live monitor, message history, Telegram integration</p>
+        </div>
+      </div>
+
+      <p><strong>Core insight:</strong> separation of concerns — configuration (agents), composition (workflows), execution (LangGraph), persistence (Postgres), and real-time observation (Redis + WebSocket) are distinct layers that must stay in sync.</p>
+    </section>
+
+    <section id="mapping">
+      <h2><span class="num">2</span> Requirements → implementation</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Requirement</th>
+            <th>Interpretation</th>
+            <th>Implementation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Configurable agents</td>
+            <td>Reusable units with many dimensions</td>
+            <td>Agent CRUD — tools, skills, memory, rules, guardrails, LLM overrides</td>
+          </tr>
+          <tr>
+            <td>Collaborative workflows</td>
+            <td>Context passes forward; conditional routing</td>
+            <td><code>graph_definition</code> → LangGraph; shared <code>agent_outputs</code> state</td>
+          </tr>
+          <tr>
+            <td>Real runtime + tools</td>
+            <td>Survives beyond browser session</td>
+            <td><code>graph_builder.py</code>, <code>tools.py</code> (search, files, messaging)</td>
+          </tr>
+          <tr>
+            <td>Agent communication</td>
+            <td>Auditable trail</td>
+            <td><code>AgentMessage</code> per run — Monitor + History</td>
+          </tr>
+          <tr>
+            <td>External channel</td>
+            <td>Human-in-the-loop</td>
+            <td>Telegram adapter: message → run → reply</td>
+          </tr>
+          <tr>
+            <td>Web UI</td>
+            <td>Full lifecycle without raw JSON</td>
+            <td>Agents, Workflows, Schedules, Monitor, History</td>
+          </tr>
+          <tr>
+            <td>Schedules</td>
+            <td>Time-based automation</td>
+            <td>Cron on workflow; scheduler worker + Schedules tab</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="pill-row">
+        <span class="pill done">✓ Agent CRUD</span>
+        <span class="pill done">✓ React Flow canvas</span>
+        <span class="pill done">✓ LangGraph runtime</span>
+        <span class="pill done">✓ Telegram bot</span>
+        <span class="pill done">✓ WebSocket monitor</span>
+        <span class="pill done">✓ Cron scheduler</span>
+      </div>
+    </section>
+
+    <section id="architecture">
+      <h2><span class="num">3</span> Architecture decisions</h2>
+
+      <div class="diagram-box">
+        <pre class="mermaid">
+flowchart TB
+    subgraph ui [Presentation Layer]
+        Agents[Agents CRUD]
+        Workflows[Workflow Canvas]
+        Monitor[Live Monitor]
+        History[Message History]
+        Schedules[Schedules Dashboard]
+    end
+
+    subgraph api [Orchestration Layer]
+        REST[FastAPI REST]
+        WS[WebSocket Hub]
+        Telegram[Telegram Adapter]
+        Scheduler[Cron Scheduler]
+    end
+
+    subgraph runtime [LangGraph Runtime]
+        Compiler[Graph Builder]
+        Repair[Graph Repair]
+        Tools[Tool Registry]
+        Guardrails[Guardrails]
+    end
+
+    subgraph data [Data Layer]
+        PG[(PostgreSQL)]
+        Redis[(Redis Pub/Sub)]
+    end
+
+    ui --> REST
+    ui --> WS
+    Telegram --> REST
+    Scheduler --> REST
+    REST --> Compiler
+    Compiler --> Repair
+    Compiler --> Tools
+    Compiler --> Guardrails
+    Compiler --> PG
+    Compiler --> Redis
+    Redis --> WS
+        </pre>
+      </div>
+
+      <h3>Why LangGraph?</h3>
+      <div class="compare-grid">
+        <div class="compare-card selected">
+          <h4>LangGraph <span class="check">✓ chosen</span></h4>
+          <p>Explicit graphs, conditional edges, feedback loops — maps to React Flow canvas</p>
+        </div>
+        <div class="compare-card">
+          <h4>CrewAI</h4>
+          <p>Faster role-based setup; less control over custom branching</p>
+        </div>
+        <div class="compare-card">
+          <h4>AutoGen</h4>
+          <p>Conversational multi-agent; harder to visualize structure</p>
+        </div>
+      </div>
+
+      <h3>Why Telegram?</h3>
+      <p>Free Bot API, works locally with polling (no webhook tunnel), reliable for demos. The adapter pattern isolates channel logic — Slack/WhatsApp can follow the same <strong>receive → run → reply</strong> contract.</p>
+
+      <h3>Other key decisions</h3>
+      <ul>
+        <li><strong>Graph repair on backend</strong> — <code>graph_repair.py</code> + <code>/api/workflows/repair-graph</code> keeps routing rules in one place</li>
+        <li><strong>Guardrails in runtime</strong> — token caps and tool allowlists enforced in <code>_apply_guardrails()</code>, not only UI</li>
+        <li><strong>Honest LLM failures</strong> — no silent mock fallback during demo runs (<code>ALLOW_MOCK_LLM_FALLBACK=false</code>)</li>
+      </ul>
+    </section>
+
+    <section id="flows">
+      <h2><span class="num">4</span> Key execution flows</h2>
+
+      <h3>Template A — Manual run</h3>
+      <div class="flow-steps">
+        <div class="flow-step"><span class="step-num">1</span><div class="step-body">User sets Run Input → clicks <strong>Run Workflow</strong></div></div>
+        <div class="flow-step"><span class="step-num">2</span><div class="step-body">API creates <code>WorkflowRun</code> (queued) → async <code>execute_workflow_run</code></div></div>
+        <div class="flow-step"><span class="step-num">3</span><div class="step-body">LangGraph: Quick Brief → Executive Summary</div></div>
+        <div class="flow-step"><span class="step-num">4</span><div class="step-body">Each node: prompt + LLM + guardrails → persist messages/logs/tokens</div></div>
+        <div class="flow-step"><span class="step-num">5</span><div class="step-body">Redis → WebSocket updates Live Monitor</div></div>
+      </div>
+
+      <h3>Template B — Telegram triage</h3>
+      <div class="diagram-box">
+        <pre class="mermaid">
+sequenceDiagram
+    participant User
+    participant Telegram
+    participant API
+    participant LangGraph
+    participant DB as PostgreSQL
+    participant UI as Web UI
+
+    User->>Telegram: Billing question
+    Telegram->>API: Polling handler
+    API->>DB: Create WorkflowRun
+    API->>LangGraph: Execute triage graph
+    LangGraph->>DB: Messages, logs, tokens
+    LangGraph->>Telegram: Formatted reply
+    DB->>UI: Message History
+        </pre>
+      </div>
+
+      <h3>Scheduled runs</h3>
+      <p>Cron + run input saved on workflow → background scheduler (UTC) → run with <code>channel: schedule</code> → managed from Schedules tab (pause / resume / delete).</p>
+    </section>
+
+    <section id="data">
+      <h2><span class="num">5</span> Data model</h2>
+      <div class="diagram-box">
+        <pre class="mermaid">
+erDiagram
+    Agent ||--o{ WorkflowNode : referenced_by
+    Workflow ||--o{ WorkflowRun : has
+    WorkflowRun ||--o{ AgentMessage : contains
+    WorkflowRun ||--o{ RunLog : contains
+    WorkflowRun ||--o{ TokenUsage : tracks
+        </pre>
+      </div>
+      <ul>
+        <li><strong>Agent</strong> — reusable config (prompt, model, tools, guardrails)</li>
+        <li><strong>Workflow</strong> — graph definition referencing agents by ID</li>
+        <li><strong>WorkflowRun</strong> — one execution with input, output, status, cost</li>
+        <li><strong>AgentMessage / RunLog / TokenUsage</strong> — audit trail per run</li>
+      </ul>
+    </section>
+
+    <section id="tradeoffs">
+      <h2><span class="num">6</span> Tradeoffs accepted</h2>
+      <table>
+        <thead>
+          <tr><th>Choice</th><th>Benefit</th><th>Cost</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Postgres + JSON columns</td><td>Relational audit + flexible graphs</td><td>No graph versioning yet</td></tr>
+          <tr><td>Redis pub/sub</td><td>Simple real-time UI</td><td>Not a full event log store</td></tr>
+          <tr><td>Polling scheduler</td><td>No Celery/Beat infra</td><td>Cron tied to poll interval; UTC only</td></tr>
+          <tr><td>Single Telegram bot</td><td>Simple demo</td><td>One workflow name per token</td></tr>
+          <tr><td>Backend graph repair</td><td>Single source of truth</td><td>UI calls repair API before save</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Testing</h3>
+      <p>Backend pytest: agent/workflow CRUD, graph compile + repair, execution, messaging, WebSocket events, Telegram routing, scheduler. In-memory SQLite for fast local runs.</p>
+    </section>
+
+    <section id="codebase">
+      <h2><span class="num">7</span> How to read the codebase</h2>
+      <table>
+        <thead>
+          <tr><th>#</th><th>File</th><th>Why start here</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td><code>backend/app/models/__init__.py</code></td><td>Data model</td></tr>
+          <tr><td>2</td><td><code>backend/app/runtime/graph_builder.py</code></td><td>JSON → LangGraph execution</td></tr>
+          <tr><td>3</td><td><code>backend/app/runtime/graph_repair.py</code></td><td>Routing repair rules</td></tr>
+          <tr><td>4</td><td><code>backend/app/channels/telegram_adapter.py</code></td><td>External channel pattern</td></tr>
+          <tr><td>5</td><td><code>frontend/src/components/WorkflowCanvas.tsx</code></td><td>Visual graph ↔ runtime parity</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Story arc:</strong> configure agents → compose workflow → execute → observe live → converse via Telegram.</p>
+    </section>
+  </main>
+
+  <footer>
+    Yuno AI Agent Orchestration Platform · Documentation of Understanding
+  </footer>
+
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'dark',
+      themeVariables: {
+        primaryColor: '#1e293b',
+        primaryTextColor: '#f1f5f9',
+        primaryBorderColor: '#38bdf8',
+        lineColor: '#64748b',
+        secondaryColor: '#111827',
+        tertiaryColor: '#0b1220',
+        fontFamily: 'Inter, sans-serif',
+      },
+      flowchart: { curve: 'basis', padding: 16 },
+      sequence: { actorMargin: 40 },
+    });
+  </script>
+</body>
+</html>
